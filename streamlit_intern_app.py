@@ -6,6 +6,17 @@ from azure.storage.blob import BlobServiceClient
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
+
+# if user is None:
+#     st.warning("You're running this app locally or without authentication.")
+#     st.stop()
+# elif user.email.endswith("@microsoft.com"):
+#     st.success(f"Welcome, {user.email}!")
+#     # Your app content starts here
+# else:
+#     st.error("Access restricted to Microsoft accounts only.")
+#     st.stop()
+
 # Load model
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
