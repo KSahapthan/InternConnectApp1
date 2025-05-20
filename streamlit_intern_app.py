@@ -6,6 +6,15 @@ from azure.storage.blob import BlobServiceClient
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
+
+user = st.experimental_user
+if user and user.email.endswith("@microsoft.com"):
+    st.success(f"Welcome, {user.email}!")
+    # Show the app content
+else:
+    st.error("Access restricted to Microsoft accounts only.")
+    st.stop()
+
 # Load model
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
