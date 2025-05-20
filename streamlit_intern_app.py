@@ -64,10 +64,11 @@ st.info(f"""
 - Registered users can directly query. Registered username is needed for querying.
 - Please enter unique dummy usernames and not original names (usernames would be stored).
 - **Current number of users: {len(users)}**
-- **NOTE**: This is a personal project so please use it responsibly. Avoid sharing overly-personal details. While details are collected to generate embeddings, they are promptly deleted and NOT STORED. The embeddings are fstored.
+- **NOTE**: This is a personal project so please use it responsibly. Avoid sharing overly-personal details. While details are collected to generate embeddings, they are promptly deleted and NOT STORED. The embeddings are stored.
 - **WORKING**: User data is converted into a meaningful sentence , passed into a sentence-embedder and cosine-similarity is used to search . This is a very naive-way of doing trying to mimic AI-Search+RAG Systems . 
 - **SAMPLE QUERY**: [Can be in Natural language] : An intern who likes to play badminton , is at building 1 and is a software engineer , and knows web deployment and likes chocolate milkshake
 - Please enter **ONLY UPTO MAX 3** entires in each field separated by commas (Eg : Gardening , Reading , Singing)
+- Queries are allowed only if >20 registered users
 """)
 
 # Registration
@@ -118,8 +119,8 @@ query = st.text_input("Enter your query:")
 if st.button("Search"):
     if not any(user['dummy_username'] == query_username for user in users):
         st.warning("Username not found. Please register first.")
-    elif len(users) < 0:
-        st.warning("Querying is only allowed when there are more than 50 users in the database.")
+    elif len(users) < 20:
+        st.warning("Querying is only allowed when there are more than 20 users in the database.")
     else:
         results = find_top10_matches(query, users)
         st.write("Top 10 Matches:")
